@@ -1,83 +1,106 @@
-import type { Metadata } from "next";
-import {
-  Plus_Jakarta_Sans,
-  Instrument_Serif,
-  Anton,
-  Reenie_Beanie,
-} from "next/font/google";
-import "./globals.css";
-import { Navbar } from "@/components/layout/Navbar";
-import { BentoFooter } from "@/components/layout/BentoFooter";
+import React from "react";
+import Image from "next/image";
+import { ClassMember } from "@/data/members";
+import { GitHubIcon, InstagramIcon, LinkedInIcon } from "@/components/ui/Icons";
 
-const plusJakarta = Plus_Jakarta_Sans({
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-sans",
-  display: "swap",
-});
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
-const anton = Anton({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-condensed",
-  display: "swap",
-});
-
-const reenieBeanie = Reenie_Beanie({
-  subsets: ["latin"],
-  weight: ["400"],
-  variable: "--font-script",
-  display: "swap",
-});
-
-export const metadata: Metadata = {
-  title: "IT-49-03 | Official University Class Portal",
-  description:
-    "Official showcase of IT-49-03 (S1 Teknologi Informasi) — 42 members, LinkedIn directory, and cohort achievements.",
+type MemberCardProps = {
+  member: ClassMember;
+  highlightGlow?: boolean;
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  return (
-    <html
-      lang="en"
-      className={`${plusJakarta.variable} ${instrumentSerif.variable} ${anton.variable} ${reenieBeanie.variable}`}
-    >
-      <body className="min-h-screen bg-canvas text-primary antialiased selection:bg-emeraldGlow selection:text-white">
-        {/* Subtle SVG Film Grain Overlay (Ref 2) */}
-        <svg
-          aria-hidden="true"
-          className="pointer-events-none fixed inset-0 z-50 h-full w-full opacity-[0.035]"
-        >
-          <filter id="it4903-grain">
-            <feTurbulence
-              type="fractalNoise"
-              baseFrequency="0.8"
-              numOctaves="3"
-              stitchTiles="stitch"
-            />
-          </filter>
-          <rect width="100%" height="100%" filter="url(#it4903-grain)" />
-        </svg>
+export function MemberCard({ member, highlightGlow = false }: MemberCardProps) {
+  const showActiveGlow = highlightGlow || member.isFeatured;
 
-        {/* Outer Boxed Frame Container (Ref 1) */}
-        <div className="max-w-[1320px] mx-auto my-3 sm:my-6 rounded-[28px] sm:rounded-[32px] border border-white/10 bg-elevated overflow-hidden shadow-2xl">
-          <Navbar />
-          <main>{children}</main>
-          <BentoFooter />
+  return (
+    <article
+      className={`group relative overflow-hidden rounded-[24px] border p-6 flex flex-col justify-between min-h-[320px] transition-all duration-300 ${
+        showActiveGlow
+          ? "border-emerald-400/25 bg-surface shadow-[0_0_50px_-15px_rgba(46,90,54,0.45)]"
+          : "border-white/10 bg-surface hover:border-white/25"
+      }`}
+    >
+      {/* Ambient Radial Spotlight Glow */}
+      <div
+        aria-hidden="true"
+        className={`pointer-events-none absolute inset-0 transition-opacity duration-300 ${
+          showActiveGlow ? "opacity-95" : "opacity-35 group-hover:opacity-80"
+        }`}
+        style={{
+          background:
+            "radial-gradient(circle at 50% 38%, rgba(46, 90, 54, 0.55) 0%, rgba(18, 18, 18, 0) 70%)",
+        }}
+      />
+
+      {/* TOP-LEFT SOCIAL ACTION BAR */}
+      <div className="relative z-10 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1.5">
+          <a
+            href={member.linkedinUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${member.name}'s LinkedIn profile`}
+            title={`Connect with ${member.name} on LinkedIn`}
+            className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.06] hover:bg-linkedin hover:border-linkedin text-primary flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+          >
+            <LinkedInIcon className="w-4 h-4" />
+          </a>
+
+          {member.githubUrl && (
+            <a
+              href={member.githubUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${member.name}'s GitHub profile`}
+              title={`${member.name}'s GitHub`}
+              className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/20 hover:border-white/30 text-primary/90 flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            >
+              <GitHubIcon className="w-4 h-4" />
+            </a>
+          )}
+
+          {member.instagramUrl && (
+            <a
+              href={member.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={`Open ${member.name}'s Instagram profile`}
+              title={`${member.name}'s Instagram`}
+              className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/20 hover:border-white/30 text-primary/90 flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
+            >
+              <InstagramIcon className="w-4 h-4" />
+            </a>
+          )}
         </div>
-      </body>
-    </html>
-  );
-}
+
+        <span className="text-[10px] uppercase tracking-[0.08em] text-dim px-2.5 py-1 rounded-full border border-white/[0.07] bg-canvas/40">
+          {member.division}
+        </span>
+      </div>
+
+      {/* CENTER IDENTITY */}
+      <div className="relative z-10 my-6 flex flex-col items-center text-center">
+        <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden border border-white/20 mb-3.5 shadow-md">
+          <Image
+            src={member.avatarUrl}
+            alt={member.name}
+            fill
+            sizes="72px"
+            className="object-cover"
+          />
+        </div>
+
+        <h3 className="text-lg font-medium text-primary tracking-tight leading-snug">
+          {member.name}
+        </h3>
+        <p className="text-xs text-muted mt-0.5">
+          {member.handle} • {member.role}
+        </p>
+
+        <p className="text-xs text-muted/90 leading-relaxed mt-3 max-w-[26ch] line-clamp-2">
+          {member.bio}
+        </p>
+      </div>
+
+      {/* BOTTOM 3 TAG PILLS */}
+      <div className="relative z-10 flex items-center justify-center flex-wrap gap-1.5 pt-2">
+        {member.tags.map((tag, idx)
