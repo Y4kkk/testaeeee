@@ -1,125 +1,68 @@
+"use client";
+
 import React from "react";
-import Image from "next/image";
-import { ClassMember } from "@/data/members";
-import { GitHubIcon, InstagramIcon, LinkedInIcon } from "@/components/ui/Icons";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-type MemberCardProps = {
-  member: ClassMember;
-  highlightGlow?: boolean;
-};
+const NAV_LINKS = [
+  { href: "/", label: "Home" },
+  { href: "/members", label: "Members" },
+  { href: "/achievements", label: "Achievements" },
+];
 
-export function MemberCard({ member, highlightGlow = false }: MemberCardProps) {
-  const showActiveGlow = highlightGlow || member.isFeatured;
+export function Navbar() {
+  const pathname = usePathname();
 
   return (
-    <article
-      className={`group relative overflow-hidden rounded-[24px] border p-6 flex flex-col justify-between min-h-[320px] transition-all duration-300 ${
-        showActiveGlow
-          ? "border-emerald-400/25 bg-surface shadow-[0_0_50px_-15px_rgba(46,90,54,0.45)]"
-          : "border-white/10 bg-surface hover:border-white/25"
-      }`}
-    >
-      {/* Ambient Radial Spotlight Glow (Ref 1 Center Card) */}
-      <div
-        aria-hidden="true"
-        className={`pointer-events-none absolute inset-0 transition-opacity duration-300 ${
-          showActiveGlow ? "opacity-95" : "opacity-35 group-hover:opacity-80"
-        }`}
-        style={{
-          background:
-            "radial-gradient(circle at 50% 38%, rgba(46, 90, 54, 0.55) 0%, rgba(18, 18, 18, 0) 70%)",
-        }}
-      />
-
-      {/* TOP-LEFT SOCIAL ACTION BAR — Mandatory LinkedIn per member + Optional GitHub/Instagram */}
-      <div className="relative z-10 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-1.5">
-          {/* Slot 1: Mandatory LinkedIn Logo Button */}
-          <a
-            href={member.linkedinUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={`Open ${member.name}'s LinkedIn profile`}
-            title={`Connect with ${member.name} on LinkedIn`}
-            className="w-9 h-9 rounded-full border border-white/15 bg-white/[0.06] hover:bg-linkedin hover:border-linkedin text-primary flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-          >
-            <LinkedInIcon className="w-4 h-4" />
-          </a>
-
-          {/* Slot 2: Optional GitHub Button */}
-          {member.githubUrl && (
-            <a
-              href={member.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${member.name}'s GitHub profile`}
-              title={`${member.name}'s GitHub`}
-              className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/20 hover:border-white/30 text-primary/90 flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              <GitHubIcon className="w-4 h-4" />
-            </a>
-          )}
-
-          {/* Slot 3: Optional Instagram Button */}
-          {member.instagramUrl && (
-            <a
-              href={member.instagramUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Open ${member.name}'s Instagram profile`}
-              title={`${member.name}'s Instagram`}
-              className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/20 hover:border-white/30 text-primary/90 flex items-center justify-center transition-all duration-200 hover:scale-105 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
-            >
-              <InstagramIcon className="w-4 h-4" />
-            </a>
-          )}
-        </div>
-
-        {/* Subtle Role Pill on Top-Right */}
-        <span className="text-[10px] uppercase tracking-[0.08em] text-dim px-2.5 py-1 rounded-full border border-white/[0.07] bg-canvas/40">
-          {member.division}
-        </span>
-      </div>
-
-      {/* CENTER IDENTITY: Circular Avatar + Name + Handle + Bio (Ref 1) */}
-      <div className="relative z-10 my-6 flex flex-col items-center text-center">
-        <div className="relative w-[72px] h-[72px] rounded-full overflow-hidden border border-white/20 mb-3.5 shadow-md">
-          <Image
-            src={member.avatarUrl}
-            alt={member.name}
-            fill
-            sizes="72px"
-            className="object-cover"
-          />
-        </div>
-
-        <h3 className="text-lg font-medium text-primary tracking-tight leading-snug">
-          {member.name}
-        </h3>
-        <p className="text-xs text-muted mt-0.5">
-          {member.handle} • {member.role}
-        </p>
-
-        <p className="text-xs text-muted/90 leading-relaxed mt-3 max-w-[26ch] line-clamp-2">
-          {member.bio}
-        </p>
-      </div>
-
-      {/* BOTTOM 3 TAG PILLS (Ref 1 Stat Pills Adaptation) */}
-      <div className="relative z-10 flex items-center justify-center flex-wrap gap-1.5 pt-2">
-        {member.tags.map((tag, idx) => (
-          <span
-            key={tag}
-            className={`px-3 py-1 rounded-full text-[11px] border ${
-              idx === 0 && showActiveGlow
-                ? "border-emerald-400/30 bg-emeraldGlow/30 text-primary"
-                : "border-white/10 bg-white/[0.03] text-muted"
-            }`}
-          >
-            {tag}
+    <header className="sticky top-0 z-40 px-4 sm:px-8 py-5 bg-elevated/80 backdrop-blur-md border-b border-white/[0.06]">
+      <nav
+        aria-label="Main Navigation"
+        className="max-w-[1200px] mx-auto flex items-center justify-between gap-4"
+      >
+        <Link
+          href="/"
+          className="text-xl sm:text-2xl tracking-tight text-primary flex items-baseline group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 rounded-lg px-1"
+        >
+          <span className="font-serif italic font-normal text-2xl sm:text-[26px] pr-0.5 group-hover:text-emerald-400 transition-colors">
+            it
           </span>
-        ))}
-      </div>
-    </article>
+          <span className="font-sans font-semibold tracking-tighter">-49-03</span>
+        </Link>
+
+        <ul className="flex items-center gap-1 sm:gap-2">
+          {NAV_LINKS.map((link) => {
+            const isActive =
+              link.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(link.href);
+
+            return (
+              <li key={link.href}>
+                <Link
+                  href={link.href}
+                  className={`px-3.5 py-1.5 rounded-full text-xs sm:text-[13px] transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 ${
+                    isActive
+                      ? "border border-white/25 bg-white/[0.07] text-primary font-medium shadow-sm"
+                      : "border border-transparent text-muted hover:text-primary hover:bg-white/[0.03]"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div className="hidden sm:flex items-center gap-2">
+          <Link
+            href="/members"
+            className="px-4 py-1.5 rounded-full border border-white/15 bg-white/[0.03] hover:border-white/30 text-xs text-primary transition-colors flex items-center gap-2"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+            <span>42 Members</span>
+          </Link>
+        </div>
+      </nav>
+    </header>
   );
 }
