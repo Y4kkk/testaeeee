@@ -103,4 +103,19 @@ export function MemberCard({ member, highlightGlow = false }: MemberCardProps) {
 
       {/* BOTTOM 3 TAG PILLS */}
       <div className="relative z-10 flex items-center justify-center flex-wrap gap-1.5 pt-2">
-        {member.tags.map((tag, idx)
+        {member.tags.map((tag, idx) => (
+          <span
+            key={tag}
+            className={`px-3 py-1 rounded-full text-[11px] border ${
+              idx === 0 && showActiveGlow
+                ? "border-emerald-400/30 bg-emeraldGlow/30 text-primary"
+                : "border-white/10 bg-white/[0.03] text-muted"
+            }`}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+    </article>
+  );
+}
