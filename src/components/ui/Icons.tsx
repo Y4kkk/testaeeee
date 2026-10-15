@@ -1,182 +1,91 @@
 import React from "react";
-import Link from "next/link";
-import { GitHubIcon, InstagramIcon, LinkedInIcon } from "@/components/ui/Icons";
 
-export function BentoFooter() {
+export function LinkedInIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
   return (
-    <footer className="px-4 sm:px-8 pt-16 pb-10 border-t border-white/[0.08]">
-      <div className="max-w-[1160px] mx-auto space-y-12">
-        {/* Top Pre-Footer Split (Ref 1 Contact / Community Section) */}
-        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-10">
-          {/* Left: Rotating Circular Monogram Badge */}
-          <div className="space-y-5">
-            <div className="text-xs text-muted flex items-center gap-1.5">
-              <span className="font-serif italic text-sm text-primary">(49)</span>
-              <span>Class Identity</span>
-            </div>
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+    </svg>
+  );
+}
 
-            <div className="relative w-28 h-28 flex items-center justify-center rounded-full border border-white/10 bg-surface">
-              <svg
-                className="w-24 h-24 animate-spin-slow text-dim"
-                viewBox="0 0 100 100"
-                aria-hidden="true"
-              >
-                <defs>
-                  <path
-                    id="circlePath"
-                    d="M 50, 50 m -36, 0 a 36,36 0 1,1 72,0 a 36,36 0 1,1 -72,0"
-                  />
-                </defs>
-                <text className="text-[7.5px] uppercase tracking-[0.22em] fill-current">
-                  <textPath href="#circlePath">
-                    • IT-49-03 • S1 TEKNOLOGI INFORMASI
-                  </textPath>
-                </text>
-              </svg>
-              <span className="absolute font-serif italic text-2xl text-primary">
-                49
-              </span>
-            </div>
-          </div>
+export function GitHubIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z" />
+    </svg>
+  );
+}
 
-          {/* Right: Editorial Heading + Directory Link */}
-          <div className="md:text-right space-y-3">
-            <p className="text-sm text-muted">S1 Teknologi Informasi</p>
-            <h2 className="text-4xl sm:text-5xl font-medium tracking-tight leading-[1.08]">
-              Meet the{" "}
-              <span className="font-serif italic font-normal text-primary/90">
-                Cohort
-              </span>
-            </h2>
-            <div className="pt-2 flex md:justify-end">
-              <Link
-                href="/members"
-                className="inline-flex items-center gap-2.5 text-sm text-primary underline underline-offset-4 decoration-white/30 hover:decoration-emerald-400 group"
-              >
-                <span>Explore all 42 members</span>
-                <span className="w-6 h-6 rounded-full bg-primary text-canvas flex items-center justify-center text-xs font-semibold group-hover:translate-x-0.5 transition-transform">
-                  ›
-                </span>
-              </Link>
-            </div>
-          </div>
-        </div>
+export function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+      <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+      <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+    </svg>
+  );
+}
 
-        {/* Micro-Metadata Divider Line (Ref 1) */}
-        <div className="flex items-center justify-between text-[11px] text-dim pt-4 border-t border-white/[0.07]">
-          <span>• Telkom University</span>
-          <span>• Class of IT-49-03</span>
-        </div>
+export function SparkleStar({ className = "w-3 h-3" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12 0L14.59 9.41L24 12L14.59 14.59L12 24L9.41 14.59L0 12L9.41 9.41L12 0Z" />
+    </svg>
+  );
+}
 
-        {/* Bottom 2-Card Asymmetric Bento Footer (Ref 1 — Clean Non-Agency Version) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
-          {/* Left 7-Column Brand Card */}
-          <div className="lg:col-span-7 relative overflow-hidden rounded-[24px] border border-white/10 bg-surface p-7 sm:p-9 flex flex-col justify-between min-h-[250px]">
-            {/* Subtle Giant Watermark */}
-            <span
-              aria-hidden="true"
-              className="pointer-events-none select-none absolute -bottom-10 right-6 font-serif italic text-[180px] leading-none text-white/[0.03]"
-            >
-              49
-            </span>
+export function EditorialOrnamentPill({ className = "" }: { className?: string }) {
+  return (
+    <div
+      className={`inline-flex items-center justify-between px-3 py-1 rounded-full border border-white/25 min-w-[116px] text-primary/80 ${className}`}
+      aria-hidden="true"
+    >
+      <SparkleStar className="w-2.5 h-2.5" />
+      <span className="w-12 h-[1px] bg-white/20 mx-2" />
+      <SparkleStar className="w-2.5 h-2.5" />
+    </div>
+  );
+}
 
-            <div className="space-y-3 max-w-sm relative z-10">
-              <div className="text-2xl tracking-tight text-primary flex items-baseline">
-                <span className="font-serif italic font-normal text-[28px] pr-0.5">
-                  it
-                </span>
-                <span className="font-sans font-semibold tracking-tighter">
-                  -49-03
-                </span>
-              </div>
-              <p className="text-xs sm:text-[13px] text-muted leading-relaxed">
-                We are a collective of 42 undergraduate students building across
-                cybersecurity, software engineering, and visual design.
-              </p>
-            </div>
+export function DoubleChevronIcon({ className = "w-3.5 h-3.5 text-vermilion" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M4.5 5.5L11 12L4.5 18.5V5.5ZM13 5.5L19.5 12L13 18.5V5.5Z" />
+    </svg>
+  );
+}
 
-            <div className="pt-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 relative z-10">
-              <p className="text-[11px] text-dim">
-                IT-49-03 © 2026. All Rights Reserved.
-              </p>
+export function ClassGeometricEmblem({ className = "w-16 h-16 text-vermilion" }: { className?: string }) {
+  return (
+    <svg className={className} viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+      <circle cx="50" cy="50" r="14" />
+      <path d="M36 22 A18 18 0 0 1 64 22 L58 32 A10 10 0 0 0 42 32 Z" />
+      <path d="M36 78 A18 18 0 0 0 64 78 L58 68 A10 10 0 0 1 42 68 Z" />
+      <path d="M22 36 A18 18 0 0 0 22 64 L32 58 A10 10 0 0 1 32 42 Z" />
+      <path d="M78 36 A18 18 0 0 1 78 64 L68 58 A10 10 0 0 0 68 42 Z" />
+      <circle cx="50" cy="12" r="5" />
+      <circle cx="50" cy="88" r="5" />
+      <circle cx="12" cy="50" r="5" />
+      <circle cx="88" cy="50" r="5" />
+    </svg>
+  );
+}
 
-              <div className="flex flex-wrap gap-1.5">
-                <Link
-                  href="/"
-                  className="px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:border-white/25 text-[11px] text-muted hover:text-primary transition-colors"
-                >
-                  Home
-                </Link>
-                <Link
-                  href="/members"
-                  className="px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:border-white/25 text-[11px] text-muted hover:text-primary transition-colors"
-                >
-                  42 Members
-                </Link>
-                <Link
-                  href="/achievements"
-                  className="px-3 py-1 rounded-full border border-white/10 bg-white/[0.03] hover:border-white/25 text-[11px] text-muted hover:text-primary transition-colors"
-                >
-                  Achievements
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Right 5-Column Class Socials & Cohort Status Card (No Newsletter Input) */}
-          <div className="lg:col-span-5 rounded-[24px] border border-white/10 bg-surface p-7 sm:p-9 flex flex-col justify-between min-h-[250px]">
-            <div className="space-y-4">
-              <h3 className="text-base font-medium text-primary leading-snug">
-                Explore the Socials
-                <br />
-                of IT-49-03
-              </h3>
-
-              <div className="flex items-center gap-2.5">
-                <a
-                  href="https://www.linkedin.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="IT-49-03 LinkedIn Network"
-                  className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-linkedin hover:border-linkedin flex items-center justify-center text-primary transition-all"
-                >
-                  <LinkedInIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://instagram.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="IT-49-03 Class Instagram"
-                  className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/15 flex items-center justify-center text-primary transition-all"
-                >
-                  <InstagramIcon className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://github.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="IT-49-03 GitHub Organization"
-                  className="w-9 h-9 rounded-full border border-white/10 bg-white/[0.04] hover:bg-white/15 flex items-center justify-center text-primary transition-all"
-                >
-                  <GitHubIcon className="w-4 h-4" />
-                </a>
-              </div>
-            </div>
-
-            <div className="space-y-2.5 pt-6">
-              <p className="text-[11px] uppercase tracking-[0.08em] text-dim">
-                Cohort Directory Status
-              </p>
-              <div className="w-full px-4 py-2.5 rounded-full border border-white/10 bg-canvas/60 flex items-center justify-between text-xs text-muted">
-                <span>S1 Teknologi Informasi</span>
-                <span className="px-2.5 py-0.5 rounded-full bg-emeraldGlow/40 border border-emerald-500/30 text-emerald-300 text-[11px] font-medium">
-                  42 Active
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
+export function HandDrawnOval({ className = "" }: { className?: string }) {
+  return (
+    <svg
+      className={`pointer-events-none ${className}`}
+      viewBox="0 0 320 110"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path
+        d="M28 62C14 34 68 12 162 10C254 8 308 28 304 56C300 84 232 100 144 98C62 96 12 76 22 48C30 26 98 16 178 18"
+        stroke="#FF3B00"
+        strokeWidth="4.5"
+        strokeLinecap="round"
+      />
+    </svg>
   );
 }
